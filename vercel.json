@@ -41,6 +41,14 @@
             "destination": "/themes/ribbon/index.html"
         },
         {
+            "source": "/vintage/:id",
+            "destination": "/themes/vintage/index.html"
+        },
+        {
+            "source": "/vintage",
+            "destination": "/themes/vintage/index.html"
+        },
+        {
             "source": "/:id",
             "destination": "/index.html"
         }
