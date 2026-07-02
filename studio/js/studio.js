@@ -392,7 +392,7 @@ const Studio = (() => {
       }
     }
 
-    _toggle(titleWrap,         isAirmail || isVintage);  // no title for airmail or vintage
+    _toggle(titleWrap,         isAirmail);                            // no title only for airmail
     _toggle(typoSec,           isAirmail || isRibbon || isVintage);   // no font/size for airmail, ribbon, or vintage
     _toggle(themeSelectorWrap, isAirmail || isRibbon || isVintage);   // hide multi-color for airmail, ribbon, or vintage
     _toggle(airmailColorDisp, !isAirmail);   // show single chip only for airmail
@@ -402,10 +402,10 @@ const Studio = (() => {
     _toggle(textureSectionWrap, isAirmail || isRibbon || isVintage);  // no paper texture for airmail, ribbon, or vintage
     _toggle(ribbonSenderWrap, !isRibbon);    // show "Dari" field ONLY for Ribbon & Seal
 
-    // Adjust spacing for Recipient Info since all elements above it are hidden for Vintage
+    // Adjust spacing for Recipient Info — remove top border only for airmail (everything hidden above)
     const recipientInfoWrap = document.getElementById('recipient-info-wrap');
     if (recipientInfoWrap) {
-      if (isVintage) {
+      if (isAirmail) {
         recipientInfoWrap.classList.remove('pt-10', 'border-t', 'border-gray-50');
       } else {
         recipientInfoWrap.classList.add('pt-10', 'border-t', 'border-gray-50');
