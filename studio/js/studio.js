@@ -143,16 +143,19 @@ const Studio = (() => {
       btn.classList.toggle('active', btn.dataset.ribbonTheme === _activeRibbonTheme);
     });
 
-    // Vintage Flower Initial State
-    _activeVintageFlower = (config.vintageFlower || 'flower1,flower2,flower3,flower4,flower5,midnight1,midnight2,midnight3').split(',');
-    document.querySelectorAll('.vintage-flower-option').forEach(btn => {
-      btn.classList.toggle('active', _activeVintageFlower.includes(btn.dataset.vintageFlower));
-    });
-
     // Vintage Color Initial State
     _activeVintageColor = config.vintageColor || 'parchment';
     document.querySelectorAll('.vintage-color-option').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.vintageColor === _activeVintageColor);
+    });
+
+    // Vintage Flower Initial State
+    const defaultFlower = _activeVintageColor === 'midnight'
+      ? 'midnight1,midnight2,midnight3'
+      : 'flower1,flower2,flower3,flower4,flower5';
+    _activeVintageFlower = (config.vintageFlower || defaultFlower).split(',');
+    document.querySelectorAll('.vintage-flower-option').forEach(btn => {
+      btn.classList.toggle('active', _activeVintageFlower.includes(btn.dataset.vintageFlower));
     });
   }
 
@@ -398,9 +401,19 @@ const Studio = (() => {
         // Swap flower group — no longer reset flowers, user keeps current selection
         _syncVintageFlowerGroup(color);
 
+        // Reset flowers to sensible default for that color, but they can still manually change them later
+        if (color === 'midnight') {
+          _activeVintageFlower = ['midnight1', 'midnight2', 'midnight3'];
+        } else {
+          _activeVintageFlower = ['flower1', 'flower2', 'flower3', 'flower4', 'flower5'];
+        }
+        document.querySelectorAll('.vintage-flower-option').forEach(b => {
+          b.classList.toggle('active', _activeVintageFlower.includes(b.dataset.vintageFlower));
+        });
+
         Autosave.trigger();
         const names = { 'parchment': 'Parchment', 'midnight': 'Blue Midnight' };
-        showToast(`Warna Amplop '${names[color] || color}' dipilih`);
+        showToast(`Warna Amplop '${names[color] || color}' dipilih, bunga di-reset ke standar`);
       });
     });
   }
