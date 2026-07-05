@@ -114,6 +114,16 @@
     0 4px 20px rgba(0, 10, 40, 0.4);
 }
 
+/* Midnight: recipient tag — light text so it's visible on dark navy envelope */
+[data-vintage-color="midnight"] .vintage-tag-for {
+  color: rgba(210, 225, 255, 0.6);
+}
+
+[data-vintage-color="midnight"] .vintage-tag-name {
+  color: rgba(230, 240, 255, 0.85);
+  text-shadow: 0 1px 8px rgba(0, 20, 80, 0.5);
+}
+
 
 /* ════════════════════════════════════════════════════════════
    RESET & BASE
