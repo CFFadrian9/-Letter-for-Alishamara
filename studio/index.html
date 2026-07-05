@@ -396,14 +396,40 @@
               </div>
             </div>
 
+
+            <!-- Vintage: Colour Scheme selector (shown only for vintage template) -->
+            <div id="vintage-color-display" class="mb-8 field-hidden">
+              <label class="text-[7px] uppercase tracking-[0.3em] text-gray-400 font-bold block mb-4">Warna Amplop</label>
+              <div class="flex flex-wrap gap-4" id="vintage-color-selector">
+
+                <!-- Parchment (default) -->
+                <button class="vintage-color-option group relative active" data-vintage-color="parchment">
+                  <div class="w-10 h-10 rounded-full border-2 border-transparent group-[.active]:border-[#b58756] flex items-center justify-center shadow-sm transition-all" style="background:#f5f0e8">
+                    <div class="w-6 h-6 rounded-full" style="background:linear-gradient(135deg,#faf6ee 0%,#e8dfc8 55%,#b58756 100%)"></div>
+                  </div>
+                  <span class="text-[8px] uppercase tracking-widest mt-2 block text-center font-bold group-[.active]:text-[#b58756] text-gray-400">Parchment</span>
+                </button>
+
+                <!-- Blue Midnight -->
+                <button class="vintage-color-option group relative" data-vintage-color="midnight">
+                  <div class="w-10 h-10 rounded-full border-2 border-transparent group-[.active]:border-[#4a72c0] flex items-center justify-center shadow-sm transition-all" style="background:#0b1628">
+                    <div class="w-6 h-6 rounded-full" style="background:linear-gradient(135deg,#1a3060 0%,#0b1628 55%,#4a72c0 100%)"></div>
+                  </div>
+                  <span class="text-[8px] uppercase tracking-widest mt-2 block text-center font-bold group-[.active]:text-[#4a72c0] text-gray-400">Midnight</span>
+                </button>
+
+              </div>
+            </div>
+
             <!-- Vintage Flowers: selectable flower types (shown only for vintage template) -->
             <div id="vintage-flower-display" class="mb-10 field-hidden">
               <label class="text-[7px] uppercase tracking-[0.3em] text-gray-400 font-bold block mb-1">Pilihan Bunga</label>
               <p class="text-[9px] text-gray-400 italic mb-4">Bisa memilih lebih dari satu tipe bunga.</p>
               <div class="flex flex-wrap gap-4" id="vintage-flower-selector">
 
+                <!-- ── PARCHMENT flowers (default, shown when color = parchment) ─────────── -->
                 <!-- Flower 1 -->
-                <button class="vintage-flower-option group relative active" data-vintage-flower="flower1">
+                <button class="vintage-flower-option group relative active" data-vintage-flower="flower1" data-vintage-color-group="parchment">
                   <div class="w-10 h-10 rounded-full border-2 border-transparent group-[.active]:border-[#7a9e7e] flex items-center justify-center shadow-sm transition-all bg-[#f4f7f2]">
                     <div class="w-7 h-7 rounded-full overflow-hidden bg-[#f4f7f2]">
                        <img src="../themes/vintage/assets/test1.webp" alt="Flower 1" class="w-full h-full object-cover" />
@@ -413,7 +439,7 @@
                 </button>
 
                 <!-- Flower 2 -->
-                <button class="vintage-flower-option group relative" data-vintage-flower="flower2">
+                <button class="vintage-flower-option group relative" data-vintage-flower="flower2" data-vintage-color-group="parchment">
                   <div class="w-10 h-10 rounded-full border-2 border-transparent group-[.active]:border-[#7a9e7e] flex items-center justify-center shadow-sm transition-all bg-[#fdf0f0]">
                     <div class="w-7 h-7 rounded-full overflow-hidden bg-[#fdf0f0]">
                       <img src="../themes/vintage/assets/test2.webp" alt="Flower 2" class="w-full h-full object-cover" />
@@ -423,7 +449,7 @@
                 </button>
 
                 <!-- Flower 3 -->
-                <button type="button" class="vintage-flower-option group flex flex-col items-center gap-2" data-vintage-flower="flower3">
+                <button type="button" class="vintage-flower-option group flex flex-col items-center gap-2" data-vintage-flower="flower3" data-vintage-color-group="parchment">
                   <div class="w-10 h-10 rounded-full border border-transparent group-[.active]:border-emerald-600/50 p-0.5 transition-all duration-300">
                     <div class="w-full h-full rounded-full overflow-hidden bg-[#F2F4F0]">
                       <img src="../themes/vintage/assets/test3.png" alt="Flower 3" class="w-full h-full object-cover scale-[1.2]" />
@@ -433,7 +459,7 @@
                 </button>
 
                 <!-- Flower 4 -->
-                <button type="button" class="vintage-flower-option group flex flex-col items-center gap-2" data-vintage-flower="flower4">
+                <button type="button" class="vintage-flower-option group flex flex-col items-center gap-2" data-vintage-flower="flower4" data-vintage-color-group="parchment">
                   <div class="w-10 h-10 rounded-full border border-transparent group-[.active]:border-emerald-600/50 p-0.5 transition-all duration-300">
                     <div class="w-full h-full rounded-full overflow-hidden bg-[#F2F4F0]">
                       <img src="../themes/vintage/assets/test4.png" alt="Flower 4" class="w-full h-full object-cover scale-[1.2]" />
@@ -443,13 +469,44 @@
                 </button>
 
                 <!-- Flower 5 -->
-                <button type="button" class="vintage-flower-option group flex flex-col items-center gap-2" data-vintage-flower="flower5">
+                <button type="button" class="vintage-flower-option group flex flex-col items-center gap-2" data-vintage-flower="flower5" data-vintage-color-group="parchment">
                   <div class="w-10 h-10 rounded-full border border-transparent group-[.active]:border-emerald-600/50 p-0.5 transition-all duration-300">
                     <div class="w-full h-full rounded-full overflow-hidden bg-[#F2F4F0]">
                       <img src="../themes/vintage/assets/test5.png" alt="Flower 5" class="w-full h-full object-cover scale-[1.2]" />
                     </div>
                   </div>
                   <span class="text-[8px] font-bold tracking-widest uppercase text-gray-400 group-[.active]:text-emerald-700">Tipe 5</span>
+                </button>
+
+                <!-- ── MIDNIGHT flowers (shown when color = midnight) ─────────── -->
+                <!-- Midnight Flower 1 -->
+                <button type="button" class="vintage-flower-option group flex flex-col items-center gap-2 hidden" data-vintage-flower="midnight1" data-vintage-color-group="midnight">
+                  <div class="w-10 h-10 rounded-full border-2 border-transparent group-[.active]:border-[#4a72c0] p-0.5 transition-all duration-300" style="background:#0b1628">
+                    <div class="w-full h-full rounded-full overflow-hidden" style="background:#111d35">
+                      <img src="../themes/vintage/assets/test1-midnight.png" alt="Midnight Flower 1" class="w-full h-full object-cover" />
+                    </div>
+                  </div>
+                  <span class="text-[8px] font-bold tracking-widest uppercase text-gray-400 group-[.active]:text-[#4a72c0]">Night 1</span>
+                </button>
+
+                <!-- Midnight Flower 2 -->
+                <button type="button" class="vintage-flower-option group flex flex-col items-center gap-2 hidden" data-vintage-flower="midnight2" data-vintage-color-group="midnight">
+                  <div class="w-10 h-10 rounded-full border-2 border-transparent group-[.active]:border-[#4a72c0] p-0.5 transition-all duration-300" style="background:#0b1628">
+                    <div class="w-full h-full rounded-full overflow-hidden" style="background:#111d35">
+                      <img src="../themes/vintage/assets/test2-midnight.png" alt="Midnight Flower 2" class="w-full h-full object-cover" />
+                    </div>
+                  </div>
+                  <span class="text-[8px] font-bold tracking-widest uppercase text-gray-400 group-[.active]:text-[#4a72c0]">Night 2</span>
+                </button>
+
+                <!-- Midnight Flower 3 -->
+                <button type="button" class="vintage-flower-option group flex flex-col items-center gap-2 hidden" data-vintage-flower="midnight3" data-vintage-color-group="midnight">
+                  <div class="w-10 h-10 rounded-full border-2 border-transparent group-[.active]:border-[#4a72c0] p-0.5 transition-all duration-300" style="background:#0b1628">
+                    <div class="w-full h-full rounded-full overflow-hidden" style="background:#111d35">
+                      <img src="../themes/vintage/assets/test3-midnight.png" alt="Midnight Flower 3" class="w-full h-full object-cover" />
+                    </div>
+                  </div>
+                  <span class="text-[8px] font-bold tracking-widest uppercase text-gray-400 group-[.active]:text-[#4a72c0]">Night 3</span>
                 </button>
               </div>
             </div>

@@ -48,7 +48,8 @@ const Preview = (() => {
       const activeTheme = Studio.getActiveTheme() || '';
       const activeRibbon = Studio.getActiveRibbonTheme() || '';
       const activeVintageFlower = Studio.getActiveVintageFlower() || '';
-      previewUrl += `&theme=${encodeURIComponent(activeTheme)}&ribbonTheme=${encodeURIComponent(activeRibbon)}&vintageFlower=${encodeURIComponent(activeVintageFlower)}`;
+      const activeVintageColor  = Studio.getActiveVintageColor()  || '';
+      previewUrl += `&theme=${encodeURIComponent(activeTheme)}&ribbonTheme=${encodeURIComponent(activeRibbon)}&vintageFlower=${encodeURIComponent(activeVintageFlower)}&vintageColor=${encodeURIComponent(activeVintageColor)}`;
 
       previewWin.location.href = previewUrl;
     } catch (e) {
@@ -100,7 +101,8 @@ const Preview = (() => {
       const activeTheme = Studio.getActiveTheme() || '';
       const activeRibbon = Studio.getActiveRibbonTheme() || '';
       const activeVintageFlower = Studio.getActiveVintageFlower() || '';
-      previewUrl += `&theme=${encodeURIComponent(activeTheme)}&ribbonTheme=${encodeURIComponent(activeRibbon)}&vintageFlower=${encodeURIComponent(activeVintageFlower)}`;
+      const activeVintageColor  = Studio.getActiveVintageColor()  || '';
+      previewUrl += `&theme=${encodeURIComponent(activeTheme)}&ribbonTheme=${encodeURIComponent(activeRibbon)}&vintageFlower=${encodeURIComponent(activeVintageFlower)}&vintageColor=${encodeURIComponent(activeVintageColor)}`;
 
       previewWin.location.href = previewUrl;
     } catch (e) {

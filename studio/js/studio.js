@@ -10,6 +10,7 @@ const Studio = (() => {
   let _activeAirmailTheme = 'airmail-parchment';
   let _activeRibbonTheme = 'ribbon-crimson'; // default airmail colour
   let _activeVintageFlower = ['flower1', 'flower2', 'flower3', 'flower4', 'flower5'];
+  let _activeVintageColor  = 'parchment'; // 'parchment' | 'midnight'
 
   function initPostAuth() {
     const config = Auth.getInitialConfig() || {};
@@ -147,6 +148,14 @@ const Studio = (() => {
     document.querySelectorAll('.vintage-flower-option').forEach(btn => {
       btn.classList.toggle('active', _activeVintageFlower.includes(btn.dataset.vintageFlower));
     });
+
+    // Vintage Color Initial State
+    _activeVintageColor = config.vintageColor || 'parchment';
+    document.querySelectorAll('.vintage-color-option').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.vintageColor === _activeVintageColor);
+    });
+    // Sync flower group visibility with restored color
+    _syncVintageFlowerGroup(_activeVintageColor);
   }
 
   function _setVal(id, val) {
@@ -289,10 +298,11 @@ const Studio = (() => {
       });
     });
 
-    // Airmail & Ribbon Colour Binding
+    // Airmail, Ribbon & Vintage Colour Binding
     _bindAirmailThemeSelector();
     _bindRibbonThemeSelector();
     _bindVintageFlowerSelector();
+    _bindVintageColorSelector();
   }
 
   function _bindRibbonThemeSelector() {
@@ -368,6 +378,49 @@ const Studio = (() => {
     });
   }
 
+  /** Show only flower buttons belonging to the active color group */
+  function _syncVintageFlowerGroup(color) {
+    document.querySelectorAll('.vintage-flower-option').forEach(btn => {
+      const group = btn.dataset.vintageColorGroup || 'parchment';
+      if (group === color) {
+        btn.classList.remove('hidden');
+      } else {
+        btn.classList.add('hidden');
+        btn.classList.remove('active');
+      }
+    });
+  }
+
+  function _bindVintageColorSelector() {
+    document.querySelectorAll('.vintage-color-option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const color = btn.dataset.vintageColor;
+        if (!color || color === _activeVintageColor) return;
+        _activeVintageColor = color;
+
+        // Update active chip
+        document.querySelectorAll('.vintage-color-option').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Swap flower group and reset selection to defaults for the new color
+        _syncVintageFlowerGroup(color);
+        if (color === 'midnight') {
+          _activeVintageFlower = ['midnight1', 'midnight2', 'midnight3'];
+        } else {
+          _activeVintageFlower = ['flower1', 'flower2', 'flower3', 'flower4', 'flower5'];
+        }
+        // Mark defaults as active in the now-visible group
+        document.querySelectorAll('.vintage-flower-option').forEach(b => {
+          b.classList.toggle('active', _activeVintageFlower.includes(b.dataset.vintageFlower));
+        });
+
+        Autosave.trigger();
+        const names = { 'parchment': 'Parchment', 'midnight': 'Blue Midnight' };
+        showToast(`Warna Amplop '${names[color] || color}' dipilih`);
+      });
+    });
+  }
+
   function _applyTemplateUI(template) {
     const titleWrap       = document.getElementById('title-field-wrap');
     const typoSec         = document.getElementById('typography-section');
@@ -397,7 +450,9 @@ const Studio = (() => {
     _toggle(themeSelectorWrap, isAirmail || isRibbon || isVintage);   // hide multi-color for airmail, ribbon, or vintage
     _toggle(airmailColorDisp, !isAirmail);   // show single chip only for airmail
     _toggle(ribbonColorDisp, !isRibbon);     // show chips only for ribbon
-    const vintageFlowerDisp = document.getElementById('vintage-flower-display');
+    const vintageColorDisp  = document.getElementById('vintage-color-display');
+    const vintageFlowerDisp  = document.getElementById('vintage-flower-display');
+    _toggle(vintageColorDisp,  !isVintage);  // show color picker only for vintage
     _toggle(vintageFlowerDisp, !isVintage);  // show flower selector only for vintage
     _toggle(textureSectionWrap, isAirmail || isRibbon || isVintage);  // no paper texture for airmail, ribbon, or vintage
     _toggle(ribbonSenderWrap, !isRibbon);    // show "Dari" field ONLY for Ribbon & Seal
@@ -870,6 +925,7 @@ const Studio = (() => {
   function getActiveAirmailTheme() { return _activeAirmailTheme; }
   function getActiveRibbonTheme() { return _activeRibbonTheme; }
   function getActiveVintageFlower() { return _activeVintageFlower.join(','); }
+  function getActiveVintageColor()  { return _activeVintageColor; }
 
   function updateSidebarBonusStatus() {
     const config = Auth.getInitialConfig() || {};
@@ -890,7 +946,7 @@ const Studio = (() => {
     }
   }
 
-  return { initPostAuth, showToast, showError, clearErrors, getStudioPassword, getActiveTheme, getActiveTexture, getActiveAirmailTheme, getActiveRibbonTheme, getActiveVintageFlower, getActiveTemplate: () => _activeTemplate, getMediaList, isMemoryEnabled, isPremium, updateSidebarBonusStatus };
+  return { initPostAuth, showToast, showError, clearErrors, getStudioPassword, getActiveTheme, getActiveTexture, getActiveAirmailTheme, getActiveRibbonTheme, getActiveVintageFlower, getActiveVintageColor, getActiveTemplate: () => _activeTemplate, getMediaList, isMemoryEnabled, isPremium, updateSidebarBonusStatus };
 })();
 
 document.addEventListener('DOMContentLoaded', async () => {

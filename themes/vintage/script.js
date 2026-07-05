@@ -22,6 +22,7 @@ const _SCRIPT_BASE = (() => {
 
 // Flower assets map based on selection
 const VINTAGE_FLOWER_ASSETS = {
+  // ── Parchment (default) flowers ──
   'flower1': [
     _SCRIPT_BASE + 'assets/test1.webp',
     _SCRIPT_BASE + 'assets/test1.webp'
@@ -41,12 +42,29 @@ const VINTAGE_FLOWER_ASSETS = {
   'flower5': [
     _SCRIPT_BASE + 'assets/test5.png',
     _SCRIPT_BASE + 'assets/test5.png'
+  ],
+  // ── Blue Midnight flowers ──
+  'midnight1': [
+    _SCRIPT_BASE + 'assets/test1-midnight.png',
+    _SCRIPT_BASE + 'assets/test1-midnight.png'
+  ],
+  'midnight2': [
+    _SCRIPT_BASE + 'assets/test2-midnight.png',
+    _SCRIPT_BASE + 'assets/test2-midnight.png'
+  ],
+  'midnight3': [
+    _SCRIPT_BASE + 'assets/test3-midnight.png',
+    _SCRIPT_BASE + 'assets/test3-midnight.png'
   ]
 };
 
 // Get all selected flowers
 function getFlowerSrcs(config) {
-  const flowerStr = config.vintageFlower || 'flower1,flower2,flower3,flower4,flower5';
+  const vintageColor  = config.vintageColor || 'parchment';
+  const defaultFlower = vintageColor === 'midnight'
+    ? 'midnight1,midnight2,midnight3'
+    : 'flower1,flower2,flower3,flower4,flower5';
+  const flowerStr   = config.vintageFlower || defaultFlower;
   const flowerTypes = flowerStr.split(',');
   let srcs = [];
   flowerTypes.forEach(t => {
@@ -140,6 +158,22 @@ async function init() {
   if (config.is_active === false) {
     showState('maintenance');
     return;
+  }
+
+  // ── Apply Vintage Color Scheme ──
+  // URL param override for preview mode (set by preview.js)
+  const urlVintageColor = params.get('vintageColor');
+  if (urlVintageColor) config.vintageColor = urlVintageColor;
+  const urlVintageFlower = params.get('vintageFlower');
+  if (urlVintageFlower) config.vintageFlower = urlVintageFlower;
+
+  const vintageColor = config.vintageColor || 'parchment';
+  document.documentElement.setAttribute('data-vintage-color', vintageColor);
+  if (vintageColor === 'midnight') {
+    const envClosed = document.querySelector('.env-closed');
+    const envOpen   = document.querySelector('.env-open');
+    if (envClosed) envClosed.src = _SCRIPT_BASE + 'envelope-closed-midnight.png';
+    if (envOpen)   envOpen.src   = _SCRIPT_BASE + 'envelope-open-midnight.png';
   }
 
   // Render static letter skeleton (clears any previous text)
