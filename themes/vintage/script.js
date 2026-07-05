@@ -60,10 +60,7 @@ const VINTAGE_FLOWER_ASSETS = {
 
 // Get all selected flowers
 function getFlowerSrcs(config) {
-  const vintageColor  = config.vintageColor || 'parchment';
-  const defaultFlower = vintageColor === 'midnight'
-    ? 'midnight1,midnight2,midnight3'
-    : 'flower1,flower2,flower3,flower4,flower5';
+  const defaultFlower = 'flower1,flower2,flower3,flower4,flower5,midnight1,midnight2,midnight3';
   const flowerStr   = config.vintageFlower || defaultFlower;
   const flowerTypes = flowerStr.split(',');
   let srcs = [];

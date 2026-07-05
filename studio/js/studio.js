@@ -9,7 +9,7 @@ const Studio = (() => {
   let _activeTemplate = 'classic';
   let _activeAirmailTheme = 'airmail-parchment';
   let _activeRibbonTheme = 'ribbon-crimson'; // default airmail colour
-  let _activeVintageFlower = ['flower1', 'flower2', 'flower3', 'flower4', 'flower5'];
+  let _activeVintageFlower = ['flower1', 'flower2', 'flower3', 'flower4', 'flower5', 'midnight1', 'midnight2', 'midnight3'];
   let _activeVintageColor  = 'parchment'; // 'parchment' | 'midnight'
 
   function initPostAuth() {
@@ -144,7 +144,7 @@ const Studio = (() => {
     });
 
     // Vintage Flower Initial State
-    _activeVintageFlower = (config.vintageFlower || 'flower1,flower2,flower3,flower4,flower5').split(',');
+    _activeVintageFlower = (config.vintageFlower || 'flower1,flower2,flower3,flower4,flower5,midnight1,midnight2,midnight3').split(',');
     document.querySelectorAll('.vintage-flower-option').forEach(btn => {
       btn.classList.toggle('active', _activeVintageFlower.includes(btn.dataset.vintageFlower));
     });
@@ -154,8 +154,6 @@ const Studio = (() => {
     document.querySelectorAll('.vintage-color-option').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.vintageColor === _activeVintageColor);
     });
-    // Sync flower group visibility with restored color
-    _syncVintageFlowerGroup(_activeVintageColor);
   }
 
   function _setVal(id, val) {
@@ -371,24 +369,19 @@ const Studio = (() => {
           'flower2': 'Tipe 2',
           'flower3': 'Tipe 3',
           'flower4': 'Tipe 4',
-          'flower5': 'Tipe 5'
+          'flower5': 'Tipe 5',
+          'midnight1': 'Tipe 6',
+          'midnight2': 'Tipe 7',
+          'midnight3': 'Tipe 8'
         };
         showToast(`Bunga '${names[flower] || flower}' ${btn.classList.contains('active') ? 'dipilih' : 'dihapus'}`);
       });
     });
   }
 
-  /** Show only flower buttons belonging to the active color group */
-  function _syncVintageFlowerGroup(color) {
-    document.querySelectorAll('.vintage-flower-option').forEach(btn => {
-      const group = btn.dataset.vintageColorGroup || 'parchment';
-      if (group === color) {
-        btn.classList.remove('hidden');
-      } else {
-        btn.classList.add('hidden');
-        btn.classList.remove('active');
-      }
-    });
+  /** All 8 flower types are always visible — no grouping needed */
+  function _syncVintageFlowerGroup(_color) {
+    // No-op: flowers are no longer grouped by color
   }
 
   function _bindVintageColorSelector() {
@@ -402,17 +395,8 @@ const Studio = (() => {
         document.querySelectorAll('.vintage-color-option').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
-        // Swap flower group and reset selection to defaults for the new color
+        // Swap flower group — no longer reset flowers, user keeps current selection
         _syncVintageFlowerGroup(color);
-        if (color === 'midnight') {
-          _activeVintageFlower = ['midnight1', 'midnight2', 'midnight3'];
-        } else {
-          _activeVintageFlower = ['flower1', 'flower2', 'flower3', 'flower4', 'flower5'];
-        }
-        // Mark defaults as active in the now-visible group
-        document.querySelectorAll('.vintage-flower-option').forEach(b => {
-          b.classList.toggle('active', _activeVintageFlower.includes(b.dataset.vintageFlower));
-        });
 
         Autosave.trigger();
         const names = { 'parchment': 'Parchment', 'midnight': 'Blue Midnight' };
