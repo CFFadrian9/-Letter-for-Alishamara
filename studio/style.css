@@ -1288,6 +1288,7 @@ textarea,
 #theme-selector-wrap.field-hidden,
 #airmail-color-display.field-hidden,
 #ribbon-color-display.field-hidden,
+#vintage-color-display.field-hidden,
 #vintage-flower-display.field-hidden,
 #texture-section-wrap.field-hidden {
   opacity: 0;
