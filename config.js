@@ -16,13 +16,13 @@ window.STANDALONE_CONFIG = {
     {
       "type": "mp3",
       "isLibrary": true,
-      "url": "https://arcade-edition.aldoramadhan16.workers.dev/files/1773904281711-n2sulb.mp3",
-      "src": "https://arcade-edition.aldoramadhan16.workers.dev/files/1773904281711-n2sulb.mp3",
-      "name": "Sampai Jadi Debu",
-      "audioName": "Sampai Jadi Debu",
-      "coverUrl": "https://arcade-edition.aldoramadhan16.workers.dev/files/1773904328731-9htah9.jpg",
-      "title": "Sampai Jadi Debu",
-      "artist": "Banda Neira"
+      "url": "https://files.catbox.moe/63ljra.mp3",
+      "src": "https://files.catbox.moe/63ljra.mp3",
+      "name": "lovers is a day",
+      "audioName": "lovers is a day",
+      "coverUrl": "https://files.catbox.moe/njwpqp.jpg",
+      "title": "lovers is a day",
+      "artist": "Cuco"
     }
   ],
   "theme": "dusty-rose",
@@ -35,6 +35,6 @@ window.STANDALONE_CONFIG = {
   },
   "publishedAt": "2026-04-15T09:23:04.043Z",
   "requestedAt": "2026-04-15T09:24:14.010Z",
-  "secretMedia": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800&q=80",
-  "secretCaption": "Us. Always. ♡"
+  "secretMedia": "https://files.catbox.moe/tpas56.jpeg",
+  "secretCaption": "amo esta foto tuya♡"
 };
